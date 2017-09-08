@@ -1,0 +1,184 @@
+.charmactivity {
+  font-size: .16rem;
+  .ad {
+    position: relative;
+    img {
+      width: 100%;
+    }
+    span {
+      display: inline-block;
+      width: .34rem;
+      height: .34rem;
+      position: absolute;
+      top: .3rem;
+    }
+    .back {
+      left: .15rem;
+      background: url("../../images/charm/back.png") no-repeat center/.34rem .34rem;
+    }
+    .detail {
+      right: .15rem;
+      background: url("../../images/charm/detail.png") no-repeat center/.34rem .34rem;
+    }
+  }
+  .header {
+    text-align: center;
+    .title {
+      font-weight: bold;
+      margin-top: .14rem;
+    }
+    .time {
+      font-size: .14rem;
+      margin: .12rem 0;
+    }
+    .tips {
+      margin-bottom: .14rem;
+    }
+  }
+  .line {
+    background: rgb(238, 238, 238);
+    height: .1rem;
+  }
+  .ranking {
+    .title {
+      position: relative;
+      height: .4rem;
+      text-align: center;
+      font-weight: 400;
+      line-height: .4rem;
+      span {
+        position: absolute;
+        right: .15rem;
+        color: rgb(60, 177, 177);
+      }
+    }
+    .top_three {
+      height: 1.5rem;
+      background: url("../../images/charm/bg.png") no-repeat center/100% 100%;
+      & > div {
+        display: inline-block;
+        width: 33.33%;
+        height: .8rem;
+        vertical-align: bottom;
+      }
+      .name {
+        width: 100%;
+        height: .2rem;
+        position: absolute;
+        bottom: -.25rem;
+        text-align: center;
+        color: #fff;
+        span{
+          display: inline-block;
+          width: 70%;
+          overflow: hidden;
+          white-space: nowrap;
+          word-break: keep-all;
+          text-overflow: ellipsis;
+        }
+      }
+      .first {
+        position: relative;
+        margin-top: .1rem;
+        height: 1rem;
+        background: url("../../images/charm/first_bg.png") no-repeat center/auto 1rem;
+        img.rank_first {
+          position: absolute;
+          bottom: 0;
+          left: calc(50% - .15rem);
+          width: .3rem;
+          height: .3rem;
+        }
+        img.header_img {
+          position: absolute;
+          top: calc(50% - .46rem);
+          left: calc(50% - .39rem);
+          width: .74rem;
+          height: .74rem;
+          border-radius: 100%;
+          border: 2px solid rgb(155, 185, 205);
+        }
+      }
+      .second {
+        position: relative;
+        margin-top: .12rem;
+        height: .8rem;
+        background: url("../../images/charm/second_bg.png") no-repeat center/auto .8rem;
+        transform: translateX(.3rem);
+        img.rank_second {
+          position: absolute;
+          bottom: 0;
+          left: calc(50% - .12rem);
+          width: .24rem;
+          height: .24rem;
+        }
+        img.header_img {
+          position: absolute;
+          top: calc(50% - .38rem);
+          left: calc(50% - .32rem);
+          width: .6rem;
+          height: .6rem;
+          border-radius: 100%;
+          border: 2px solid rgb(155, 185, 205);
+        }
+      }
+      .third {
+        position: relative;
+        margin-top: .12rem;
+        height: .8rem;
+        background: url("../../images/charm/third_bg.png") no-repeat center/auto .8rem;
+        transform: translateX(-.3rem);
+        img.rank_third {
+          position: absolute;
+          bottom: 0;
+          left: calc(50% - .12rem);
+          width: .24rem;
+          height: .24rem;
+        }
+        img.header_img {
+          position: absolute;
+          top: calc(50% - .38rem);
+          left: calc(50% - .32rem);
+          width: .6rem;
+          height: .6rem;
+          border-radius: 100%;
+          border: 2px solid rgb(155, 185, 205);
+        }
+      }
+    }
+    li {
+      display: inline-block;
+      list-style: none;
+      width: 100%;
+      padding: .07rem .15rem .07rem 0;
+      border-bottom: 1px solid rgb(237, 237, 237);
+      box-sizing: border-box;
+      clear: right;
+      & > div {
+        display: inline-block;
+        vertical-align: middle;
+      }
+      .head {
+        width: .45rem;
+        height: .45rem;
+        & > img {
+          width: 100%;
+          height: 100%;
+          border-radius: 100%;
+        }
+      }
+      .index {
+        width: .45rem;
+        text-align: center;
+      }
+      .name {
+        margin-left: .18rem;
+      }
+      .score {
+        float: right;
+        line-height: .45rem;
+        color: rgb(255, 138, 0);
+      }
+    }
+  }
+}

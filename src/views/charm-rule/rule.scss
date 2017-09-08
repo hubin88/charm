@@ -1,0 +1,45 @@
+/* stylelint-disable */
+.charmdetaile {
+  font-size: .12rem;
+  color: #444;
+  border-top: 1px solid rgb(229, 229, 229);
+  padding: .4rem .3rem 0;
+  box-sizing: border-box;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #111;
+  }
+  tr {
+    height: .38rem;
+    border-bottom: 1px solid rgb(234, 234, 234);
+  }
+  th {
+    width: 50%;
+    background: rgb(100, 100, 100);
+    color: #fff;
+  }
+  .th {
+    height: .3rem;
+  }
+  td {
+    border-right: 1px solid rgb(234, 234, 234);
+    text-align: center;
+  }
+  td:first-child {
+    border-left: 1px solid rgb(234, 234, 234);
+  }
+  .tips {
+    margin-top: .3rem;
+    color: #444;
+    .title {
+      margin: .1rem 0;
+    }
+    li {
+      line-height: .2rem;
+      margin-bottom: .1rem;
+      display: inline-block;
+      list-style: none;
+    }
+  }
+}

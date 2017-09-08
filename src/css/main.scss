@@ -1,0 +1,46 @@
+@import "normalize";
+html {
+  font-size: 625%;
+  height: 100%;
+  width: 100%;
+}
+
+body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+#root > div {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+  font-size: .14rem;
+}
+
+.app {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #fff;
+}
+
+.app > div {
+  width: 100%;
+  height: 100%;
+  background: #fff;
+}
+
+img.upload-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: .1rem auto;
+}
+
+button {
+  outline: none;
+}
+p{
+  margin: 0;
+}

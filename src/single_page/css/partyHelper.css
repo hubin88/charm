@@ -1,0 +1,43 @@
+li .partyList__title___1OTfs {
+    height: .5rem;
+    line-height: .5rem;
+    font-size: .16rem;
+    background-color: #fff;
+    clear: both;
+    overflow: hidden;
+    letter-spacing: -1px;
+}
+
+li .partyList__dot___1NbZ7 {
+    display: inline-block;
+    width: .3rem;
+    height: 100%;
+    padding-left:.16rem;
+    background: url(../images/dot.png) no-repeat 50%/40% auto;
+    float: left
+}
+
+li .partyList__content___2m1eD {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+li .partyList__arrow___1w3um {
+    display: inline-block;
+    width: .4rem;
+    height: 100%;
+    padding-right: .16rem;
+    background-image: url(../images/arrow-down.png);
+    background-repeat: no-repeat;
+    background-position: 0;
+    background-size: 50% auto;
+    float: right
+}
+
+li .partyList__answer___2kd4b {
+    display: none;
+    overflow: hidden;
+    padding: .2rem .16rem
+}

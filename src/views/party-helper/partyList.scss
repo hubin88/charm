@@ -1,0 +1,40 @@
+li {
+  .title {
+    height: .5rem;
+    line-height: .5rem;
+    font-size: .16rem;
+    background-color: #fff;
+    clear: both;
+    overflow: hidden;
+  }
+  .dot {
+    display: inline-block;
+    width: .42rem;
+    height: 100%;
+    padding: 0 .16rem;
+    background: url("../../images/register/dot.png") no-repeat center center/30% auto;
+    float: left;
+  }
+  .content {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .arrow {
+    display: inline-block;
+    width: .4rem;
+    height: 100%;
+    padding-right: .16rem;
+    background-image: url("../../images/register/arrow-down.png");
+    background-repeat: no-repeat;
+    background-position: left center;
+    background-size: 50% auto;
+    float: right;
+  }
+  .answer{
+    display: none;
+    overflow: hidden;
+    padding: .2rem .16rem;
+  }
+}

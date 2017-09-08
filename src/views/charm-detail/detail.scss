@@ -1,0 +1,77 @@
+.charmvalue {
+  font-size: .15rem;
+  color: #444;
+  border-top: 1px solid rgb(229,229,229);
+  overflow: hidden;
+  box-sizing: border-box;
+  .current-value {
+    height: .84rem;
+    padding: 0 .15rem;
+    box-sizing: border-box;
+    & > * {
+      display: inline-block;
+    }
+    .text {
+      padding: .3rem 0;
+    }
+    span {
+      float: right;
+      height: .84rem;
+      font-size: .73rem;
+      color: #f7a437;
+      line-height: .84rem;
+    }
+  }
+  .line {
+    height: .1rem;
+    background: rgb(238,237,238);
+  }
+  .title {
+    height: .4rem;
+    padding: 0 .15rem;
+    line-height: .4rem;
+    background: rgb(253,252,253);
+    border-bottom: 1px solid rgb(241,241,241);
+  }
+  .wrapper{
+    overflow: hidden;
+  }
+  .tabs-content {
+    padding: 0 .15rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .row {
+    height: .72rem;
+  }
+  .cell {
+    display: inline-block;
+    clear: right;
+  }
+  .type {
+    height: .3rem;
+    line-height: .3rem;
+    padding-top: .14rem;
+  }
+  .time {
+    height: .28rem;
+    line-height: .28rem;
+  }
+  .value {
+    float: right;
+    width: 1rem;
+    font-size: .4rem;
+    line-height: .72rem;
+    text-align: right;
+    color: #f7a437;
+    position: relative;
+    span{
+      position: absolute;
+      top:.2rem;
+      right: .32rem;
+      display: inline-block;
+      line-height: .3rem;
+      font-size: .3rem;
+    }
+  }
+}
