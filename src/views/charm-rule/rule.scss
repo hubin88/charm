@@ -2,9 +2,12 @@
 .charmdetaile {
   font-size: .12rem;
   color: #444;
-  border-top: 1px solid rgb(229, 229, 229);
-  padding: .4rem .3rem 0;
   box-sizing: border-box;
+  overflow: scroll;
+  .tab-content{
+    border-top: 1px solid rgb(229, 229, 229);
+    padding: .4rem .3rem 0;
+  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -38,8 +41,11 @@
     li {
       line-height: .2rem;
       margin-bottom: .1rem;
-      display: inline-block;
+      display: table;
       list-style: none;
+      span{
+        display:table-cell;
+      }
     }
   }
 }

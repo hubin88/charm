@@ -5,9 +5,12 @@
 import React, { Component, PropTypes } from 'react';
 import './details.scss';
 import { dateFormat, timeDifference, getDevice } from '../../ultils/tools';
-import { POST, GET } from '../../ultils/server';
+import { POST, GET, DELETE } from '../../ultils/server';
 import Alert from '../../components/alert';
+import SlideUp from '../../components/slide-up';
 import SureRegister from '../sure-register/sure-register';
+import Reply from '../reply/reply';
+import Tips from '../../components/tips';
 
 export default class Details extends Component {
   static propTypes = {
@@ -39,13 +42,24 @@ export default class Details extends Component {
       commentList: [],
       registerList: [],
       slogansList: [],
+      canRegister: false,
+      isSelf: false,
+      commentPlaceholder: '随便说点什么',
+      isReply: false,//是否是回复的评论
+      comment: {},//被评论的评论
     };
   }
 
   componentWillMount() {
     setTimeout(this.layout, 0);
+  }
+
+  componentDidMount() {
     const { params } = this.props;
-    if (!params.partyid && !params.userid) return;
+    if (!params.partyid) return;
+    if (!params.userid) {
+      params.userid = 1;
+    }
     this.getJsonDetails(params.partyid, params.userid);
     this.getJsonRegisterUser(params.partyid);
     this.getJsonComment(params.partyid, params.userid);
@@ -57,22 +71,27 @@ export default class Details extends Component {
     });
   };
   getJsonDetails = (partyId, userId) => {
-    const detailsUrl = `http://${url}/v1/party/detail/${partyId}/user/${userId}`;
-    GET(detailsUrl).then((res) => {
+    this.getDetails(partyId, userId).then((res) => {
+      this.getJsonSlogans(res.author.userId);
+    });
+  };
+  getDetails = (partyId, userId) => {
+    const detailsUrl = `${url}/v1/party/detail/${partyId}/user/${userId}`;
+    return GET(detailsUrl).then((res) => {
       if (res.code === 200) {
         const data = res.data || {};
         this.setState({
           data,
+          canRegister: data.registerState === 0,
+          isSelf: data.author.userId === parseInt(this.props.params.userid),
         });
         return data
       }
       return {};
-    }).then((res) => {
-      this.getJsonSlogans(res.author.userId);
     });
   };
   getJsonRegisterUser = (partyId) => {
-    const registerUrl = `http://${url}/v1/party/register/list/${partyId}`;
+    const registerUrl = `${url}/v1/party/register/list/${partyId}`;
     GET(registerUrl).then((res) => {
       if (res.code === 200) {
         const data = res.list || {};
@@ -83,7 +102,7 @@ export default class Details extends Component {
     });
   };
   getJsonComment = (partyId, userId) => {
-    const commentUrl = `http://${url}/v1/comment/list/with/party/${partyId}/user/${userId}`;
+    const commentUrl = `${url}/v1/comment/list/with/party/${partyId}/user/${userId}`;
     GET(commentUrl).then((res) => {
       if (res.code === 200) {
         const data = res.list || {};
@@ -94,7 +113,7 @@ export default class Details extends Component {
     });
   };
   getJsonSlogans = (userId) => {
-    const slogansUrl = `http://${url}/v1/party/slogan/list/with/user/${userId}`;
+    const slogansUrl = `${url}/v1/party/slogan/list/with/user/${userId}`;
     GET(slogansUrl).then((res) => {
       if (res.code === 200) {
         const data = res.list || {};
@@ -104,6 +123,7 @@ export default class Details extends Component {
       }
     });
   };
+
   layout = () => {
     const details = this.details.getBoundingClientRect();
     const height = details.height - 42;
@@ -114,26 +134,12 @@ export default class Details extends Component {
       showComment: flag,
     });
   };
-  sendComment = () => {
-    const { params } = this.props;
-    const obj = {
-      content: this.state.myComment.replace(/</g, '&lt;').replace(/>/, '&gt;'),
-      objectId: params.partyid,
-      userId: params.userid,
-    };
-    const commentUrl = `http://${url}/v1/comment/party`;
-    POST(commentUrl, obj).then((res) => {
-      if (res.code === 201) {
-        this.setState({
-          myComment: '',
-        });
-        this.getJsonComment(params.partyid, params.userid);
-      }
-    });
-  };
+
   goToRegister = () => {
+    if (!this.state.canRegister) return;
     const { data } = this.state;
     const { params } = this.props;
+    if(params.userid === 1) params.userid = this.getUserId();
     if (data.cost === 3) {
       const obj = {
         partyId: params.partyid,
@@ -146,9 +152,15 @@ export default class Details extends Component {
       }
     } else {
       Alert.show({
-        content: <SureRegister {...this.props} />
+        content: <SureRegister {...this.props} noRegister={this.changeCanRegister}
+                               callback={() => this.getDetails(params.partyid, params.userid)} />
       });
     }
+  };
+  changeCanRegister = () => {
+    this.setState({
+      canRegister: false,
+    });
   };
   allImpression = (userId) => {
     if (this.props.device === 'Ios') {
@@ -164,28 +176,108 @@ export default class Details extends Component {
       window.jsInterface.startPersonalHomePageActivity(userId);
     }
   };
-  back=()=>{
+  // back = () => {
+  //   if (this.props.device === 'Ios') {
+  //     window.location.href = `app://gotoBack`;
+  //   } else {
+  //     window.jsInterface.finishActivity("");
+  //   }
+  // };
+  // more = (userId) => {
+  //   if (this.props.device === 'Ios') {
+  //     window.location.href = `app://gotoShare?userid=${userId}`;
+  //   } else {
+  //     window.jsInterface.startShareActivity("");
+  //   }
+  // };
+  getAuthorId = () => {
+    const { data } = this.state;
+    const { author = {} } = data;
     if (this.props.device === 'Ios') {
-      window.location.href = `app://gotoBack`;
-    } else {
-      window.jsInterface.finishActivity("");
-    }
-  };
-  more=()=>{
-    if (this.props.device === 'Ios') {
-      window.location.href = `app://gotoShare`;
+      window.location.href = `app://gotoShare?userid=${author.userId}`;
     } else {
       window.jsInterface.startShareActivity("");
     }
+  };
+  reply = (comment) => {
+    SlideUp.show({
+      content: <Reply {...this.props} comment={comment} replyComment={this.replyComment}
+                      delete={this.deleteSelfComment} />
+    })
+  };
+  replyComment = (comment) => {
+    this.commentText.focus();
+    this.setState({
+      commentPlaceholder: `回复 ${comment.author.name}:`,
+      isReply: true,
+      comment,
+    });
+  };
+  getUserId = () => {
+    if (this.props.device === 'Ios') {
+      const data = window.getUserInfo();
+      return data.userId;
+    } else {
+      const data = window.jsInterface.getUserInfo();
+      return data.userId;
+    }
+  };
+  sendComment = () => {
+    const { params } = this.props;
+    if(params.userid === 1) params.userid = this.getUserId();
+    const obj = {
+      content: this.state.myComment.replace(/</g, '&lt;').replace(/>/, '&gt;'),
+      objectId: parseInt(params.partyid),
+      userId: parseInt(params.userid),
+    };
+    let commentUrl = `${url}/v1/comment/party`;
+    if (this.state.isReply) {
+      commentUrl = `${url}/v1/comment/party/reply`;
+      const { commentId, replyId, author, sessionId } = this.state.comment;
+      Object.assign(obj, {
+        commentId,
+        replyId: replyId ? replyId : commentId,
+        replyUserId: author.userId,
+        sessionId: sessionId ? sessionId : commentId,
+      });
+    }
+    POST(commentUrl, obj).then((res) => {
+      if (res.code === 201) {
+        this.setState({
+          myComment: '',
+          isReply: false,
+        });
+        this.getDetails(params.partyid, params.userid);
+        this.getJsonComment(params.partyid, params.userid);
+      } else {
+        Tips.show(res.message);
+      }
+    });
+  };
+  deleteSelfComment = (commentId) => {
+    const { params } = this.props;
+    if(params.userid === 1) params.userid = this.getUserId();
+    DELETE(`${url}/v1/comment/${commentId}`).then(res => {
+      if (res.code === 200) {
+        this.getDetails(params.partyid, params.userid);
+        this.getJsonComment(params.partyid, params.userid);
+      } else {
+        Tips.show(res.message);
+      }
+    });
   };
   renderCommentList = (item, index) =>
     <li styleName="comment-list" key={index}>
       <div styleName="userImg" onTouchEnd={() => this.goToHeader(item.author.userId)}>
         <img src={item.author.headPic} alt="" />
       </div>
-      <div>
+      <div onTouchEnd={() => this.reply(item)}>
         <div styleName="user">
-          <span styleName="user-nick">{item.author.name}</span>
+          <span styleName="user-nick">
+            <span>{item.author.name}</span>
+            {item.replyUser ? ' 回复 ' : null}
+            {item.replyUser ? <span>{item.replyUser.name}</span> : null}
+          </span>
           <span styleName="comment-time">{timeDifference(item.latestTime)}</span>
         </div>
         <div>{item.content.replace(/&lt;/g, '<').replace(/&gt;/g, '>')}</div>
@@ -208,14 +300,17 @@ export default class Details extends Component {
   render() {
     const { data } = this.state;
     const { author = {} } = data;
+    const { photo } = data;
+    window.authorId = this.getAuthorId;
+    document.title = '活动详情';
     return (
       <div styleName="details" ref={(ref) => { this.details = ref; }}>
         <div styleName="details-content" ref={(ref) => { this.detailsContent = ref; }}>
-          <div styleName="ad">
-            <img src={require('../../images/detail/ad.jpg')} style={{ width: '100%', height: 'auto' }} />
-            <span styleName="back" onTouchEnd={this.back}/>
-            <span styleName="more" onTouchEnd={this.more}/>
-          </div>
+          {photo ?
+            <div styleName="ad">
+              <img src={photo[0]} style={{ width: '100%', height: 'auto' }} />
+            </div> : null
+          }
           <div styleName="content">
             <div styleName="title">
               <div styleName="logo" onTouchEnd={() => this.goToHeader(author.userId)}>
@@ -263,7 +358,7 @@ export default class Details extends Component {
             <div styleName="impression-label">
               {this.state.slogansList.map((item, index) => <span key={index}>{item}</span>)}
               <div styleName="all-impression">
-                <span onTouchEnd={()=>this.allImpression(author.userId)}>查看全部印象>></span>
+                <span onTouchEnd={() => this.allImpression(author.userId)}>查看全部印象>></span>
               </div>
             </div> : null}
           <div styleName="comment-box">
@@ -292,17 +387,19 @@ export default class Details extends Component {
           </div>
         </div>
         {
-          data.state === 1 && (data.registerState === 0 || data.registerState === 1) ?
-            <button styleName="register-btn" onTouchEnd={this.goToRegister}>报名</button> : null
+          !this.state.isSelf && data.state === 1 ?
+            <button styleName={`register-btn${this.state.canRegister ? ' active' : ''}`}
+                    onTouchEnd={this.goToRegister}>{this.state.canRegister ? '' : '已'}报名</button> : null
         }
         {this.state.showComment ?
           <div styleName="my-comment">
             <input
               type="text"
               styleName="my-comment-text"
-              placeholder="随便说点什么"
+              placeholder={this.state.commentPlaceholder}
               value={this.state.myComment}
               onChange={e => this.onChange('myComment', e.target.value)}
+              ref={(ref) => { this.commentText = ref; }}
             />
             <button styleName={this.state.myComment ? 'button btn-active' : 'button'} onTouchEnd={this.sendComment}>发送
             </button>

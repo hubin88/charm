@@ -1,0 +1,32 @@
+header{
+    text-align: center;
+    line-height: 50px;
+    font-family: "黑体";
+    font-size: 20px;
+    font-weight: bolder;
+}
+.main{
+    margin: 0 auto;
+    padding: 0 12px;
+}
+.imgbox{
+    position: relative;
+    margin-bottom: 18px;
+}
+.discription{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    background: rgba(0,0,0,.8);
+    line-height: 40px;
+    color:white;
+    text-indent: 12px;
+    font-size: 16px;
+    font-family: "幼圆"
+}
+.discount{
+    position: absolute;
+    right: 12px;
+    font-size: 20px;
+    font-weight: bold;
+}

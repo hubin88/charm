@@ -21,7 +21,7 @@ export default class Details extends Component {
 
   componentWillMount() {
     const id = this.registerId;
-    getAjax(`http://${url}/v1/party/register/detail/${id}`).then((res)=> {
+    getAjax(`${url}/v1/party/register/detail/${id}`).then((res)=> {
       if (res.code === 200) {
         const data = res.data;
         this.setState({

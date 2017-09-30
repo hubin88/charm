@@ -48,6 +48,7 @@ module.exports = {
         },
       },
       { test: /\.(jpg|gif|png|svg|ico)$/, loader: 'file-loader?name=images/[name].[ext]' },
+      // { test:/\.(jpg|gif|png|svg|ico)$/,loader: "url-loader" },
       {
         test: /\.scss$/,
         exclude: path.resolve(__dirname, '../src/css/'), // 非src/css下的scss开启局部样式模式

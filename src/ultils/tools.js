@@ -376,10 +376,14 @@ export const check = {
 };
 
 // 图片加载
-export function loadImage(urlArr) {
-  urlArr.forEach((item) => {
+export function loadImage(imgArr) {
+  imgArr.forEach((item) => {
     const img = new Image();
-    img.src = item;
+    img.onload = function () {
+      img.onload = null;
+      item.callback && item.callback(img);
+    }
+    img.src = item.url;
   });
 }
 

@@ -9,21 +9,23 @@
 
 .ad {
   position: relative;
-  span {
-    display: inline-block;
-    width: .34rem;
-    height: .34rem;
-    position: absolute;
-    top: .3rem;
-  }
-  .back{
-    left: .15rem;
-    background: url("../../images/detail/back2.png") no-repeat center/.34rem .34rem;
-  }
-  .more{
-    right: .15rem;
-    background: url("../../images/detail/more.png") no-repeat center/.34rem .34rem;
-  }
+  font-size: 0;
+  //span {
+  //  display: inline-block;
+  //  width: .34rem;
+  //  height: .34rem;
+  //  position: fixed;
+  //  top: .3rem;
+  //  z-index: 999;
+  //}
+  //.back{
+  //  left: .15rem;
+  //  background: url("../../images/detail/back2.png") no-repeat center/.34rem .34rem;
+  //}
+  //.more{
+  //  right: .15rem;
+  //  background: url("../../images/detail/more.png") no-repeat center/.34rem .34rem;
+  //}
 }
 
 .content {
@@ -106,7 +108,7 @@
 
 .party-state {
   display: table-cell;
-  width: .5rem;
+  width: .7rem;
   text-align: right;
   vertical-align: middle;
   color: #62c0c1;
@@ -119,7 +121,7 @@
 }
 
 .party-content > div {
-  height: .2rem;
+  min-height: .2rem;
   padding: .05rem .1rem .05rem .3rem;
   background-repeat: no-repeat;
   background-position: .05rem .06rem;
@@ -159,9 +161,9 @@
   background: #fff;
   font-size: .13rem;
   color: #444;
-  p{
-    font-size: 0.12rem!important;
-    img{
+  p {
+    font-size: 0.12rem !important;
+    img {
       width: 100%;
       height: auto;
     }
@@ -322,6 +324,9 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     padding-top: .05rem;
+    span{
+      color: #62c0c1;
+    }
   }
   .comment-time {
     display: table-cell;
@@ -383,6 +388,7 @@
   margin-left: .05rem;
   color: #999;
   font-size: .14rem;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .btn-active {
@@ -398,7 +404,13 @@
   position: fixed;
   bottom: .6rem;
   right: .14rem;
-  background: #ffa024;
+  background: rgb(124, 127, 134);
   color: #fff;
   border: none;
+  -webkit-tap-highlight-color: transparent;
 }
+
+.register-btn.active {
+  background: #ffa024 !important;
+}
+

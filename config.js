@@ -9,10 +9,10 @@
 /*
  * 开发环境
  * */
-var url='m.api.hboffice.cn';
+var url='http://m.api.hboffice.cn';
 
 
 /*
  * 正式环境
  * */
-// var url = "m.api.louka.net.cn";
+// var url = "https://m.api.louka.net.cn";

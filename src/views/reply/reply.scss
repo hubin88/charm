@@ -1,0 +1,23 @@
+/* stylelint-disable */
+.reply{
+  margin: 0 auto;
+  width: calc(100% - .1rem);
+  font-size: .14rem;
+  text-align: center;
+  ul{
+    background: #fff;
+    border-radius: .05rem;
+    li{
+      height: .5rem;
+      line-height: .5rem;
+    }
+  }
+  div{
+    margin: .1rem 0;
+    background: #fff;
+    border-radius: .05rem;
+    height: .5rem;
+    line-height: .5rem;
+    color: #62c0c1;
+  }
+}

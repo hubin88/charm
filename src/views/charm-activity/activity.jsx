@@ -21,7 +21,7 @@ export default class Activity extends Component {
   }
 
   componentWillMount() {
-    GET(`http://${url}/v1/charm/top`).then(res => {
+    GET(`${url}/v1/charm/top`).then(res => {
       if (res.code === 200) {
         const data = res.list || [];
         this.setState({
@@ -46,25 +46,28 @@ export default class Activity extends Component {
     }
   };
   detail = () => {
-    browserHistory.push('/party/charm/show');
+    browserHistory.push('/charm/show');
   };
   rule = () => {
+    browserHistory.push('/charm/rule?type=1');
+  };
+  goToHeader = (userId) => {
     if (this.props.device === 'Ios') {
-      window.location.href = `app://gotoCharmRule`;
+      window.location.href = `app://gotoDetail?userid=${userId}`;
     } else {
-      window.jsInterface.startRuleActivity("");
+      window.jsInterface.startPersonalHomePageActivity(userId);
     }
   };
   renderTopThree = (item) =>
     <div styleName={item.index} key={item.userId}>
-      <img src={item.headPic} styleName="header_img" alt="" />
+      <img src={item.headPic} styleName="header_img" alt="" onTouchEnd={() => this.goToHeader(item.userId)} />
       <img src={require(`../../images/charm/${item.index}.png`)} styleName={`rank_${item.index}`} alt="" />
       <div styleName="name"><span>{item.name}</span></div>
     </div>;
   renderList = (item, index) =>
-    <li key={item.userId}>
+    <li key={index}>
       <div styleName="index">{index + 1}</div>
-      <div styleName="head"><img src={item.headPic} alt="" /></div>
+      <div styleName="head" onTouchEnd={() => this.goToHeader(item.userId)}><img src={item.headPic} alt="" /></div>
       <div styleName="name">{item.name}</div>
       <div styleName="score">{item.charm}</div>
     </li>;
@@ -78,9 +81,9 @@ export default class Activity extends Component {
           <span styleName="detail" onTouchEnd={this.detail} />
         </div>
         <div styleName="header">
-          <div styleName="title">玖月・遇见——楼咖大型职场魅力SHOW</div>
-          <div styleName="time">活动时间：9月11日——9月30日</div>
-          <div styleName="tips">来楼咖，SHOW自己，赢百元大奖!</div>
+          <div styleName="title">楼咖大型职场魅力SHOW</div>
+          <div styleName="tips">如何获取魅力值：被关注一次+1，被约见一次+3，主动约见成功+5，魅力值越高排名越靠前。</div>
+          <div styleName="tips">如何关注/约见：用户可直接在该页面点击排行榜用户头像关注/约见对方，或在“发现”-“人脉”直接搜索用户，进入用户主页关注/约见对方。</div>
         </div>
         <div styleName="line"></div>
         <div styleName="ranking">

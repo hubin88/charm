@@ -1,0 +1,92 @@
+
+main{
+    padding: 12px;
+    position: relative;
+}
+.dic{
+    position: absolute;
+    font-family: "幼圆";
+    font-size: 16px;
+    font-weight: 600;
+    color:rgb(152,152,152);
+    right: 112px;
+    bottom: -16px;
+}
+.discount{
+    position: absolute;
+    right: 12px;
+    height: 80px;
+    width:80px;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 80px;
+    background: rgb(249,164,57);
+    -webkit-transform: translateY(-40px);
+    -ms-transform: translateY(-40px);
+    -o-transform: translateY(-40px);
+    transform: translateY(-40px);
+    font-size: 28px;
+    color: white;
+}
+.disNum{
+    font-size: 20px;
+}
+section{
+    padding: 12px;
+    margin-top: 20px;
+    font-size: 16px;
+    font-family: "幼圆";
+}
+.title{
+    color:rgb(83,183,184);
+    font-size: 18px;
+    text-shadow: 0 0 1px rgb(83,183,184);
+    line-height: 50px;
+}
+.benefit,.introduce,.info{
+    margin: 12px 0;
+}
+.exchange h4{
+    font-size: 16px;
+}
+table{
+    font-size: 14px;
+}
+.table_title{
+    width:90px;
+    height: 20px;
+    color:#888;
+    text-align: justify;
+}
+footer{
+    height: 30px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: white;
+    border-top: 1px solid #ddd;
+}
+footer span{
+    color:#aaa;
+    position: absolute;
+    right: 12px;
+    bottom: 6px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

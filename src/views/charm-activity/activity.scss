@@ -1,5 +1,6 @@
 .charmactivity {
   font-size: .16rem;
+  overflow: scroll;
   .ad {
     position: relative;
     img {
@@ -7,32 +8,32 @@
     }
     span {
       display: inline-block;
-      width: .34rem;
-      height: .34rem;
       position: absolute;
       top: .3rem;
     }
     .back {
+      width: .34rem;
+      height: .34rem;
       left: .15rem;
-      background: url("../../images/charm/back.png") no-repeat center/.34rem .34rem;
+      background: url("../../images/charm/back3.png") no-repeat center/.34rem .34rem;
     }
     .detail {
+      width: .45rem;
+      height: .34rem;
       right: .15rem;
-      background: url("../../images/charm/detail.png") no-repeat center/.34rem .34rem;
+      background: url("../../images/charm/view.png") no-repeat center/.45rem .34rem;
     }
   }
   .header {
-    text-align: center;
     .title {
       font-weight: bold;
-      margin-top: .14rem;
-    }
-    .time {
-      font-size: .14rem;
-      margin: .12rem 0;
+      margin: .14rem 0;
+      padding: 0 .15rem;
+      font-size: .2rem;
     }
     .tips {
       margin-bottom: .14rem;
+      padding: 0 .15rem;
     }
   }
   .line {

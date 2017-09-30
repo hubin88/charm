@@ -13,6 +13,7 @@ export function POST(url, obj) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: token,
     },
     body: postData,
   }).then(res => res.json()).then(rs => rs);
@@ -24,6 +25,7 @@ export function GET(url) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: token,
     },
   }).then(res => res.json()).then(rs => rs);
 }
@@ -34,6 +36,7 @@ export function DELETE(url) {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      Authorization: token,
     },
   }).then(res => res.json()).then(rs => rs);
 }

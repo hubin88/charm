@@ -1,30 +1,21 @@
 .charmvalue {
-  font-size: .15rem;
   color: #444;
-  border-top: 1px solid rgb(229,229,229);
   overflow: hidden;
   box-sizing: border-box;
   .current-value {
-    height: .84rem;
-    padding: 0 .15rem;
+    height: 1.8rem;
+    background: url("../../images/charm/detail-bg.png") no-repeat center top/100% 100%;
     box-sizing: border-box;
-    & > * {
+    text-align: center;
+    color: #fff;
+    span{
       display: inline-block;
+      margin-top: .6rem;
+      font-size: .6rem;
     }
-    .text {
-      padding: .3rem 0;
+    .text{
+      font-size: .13rem;
     }
-    span {
-      float: right;
-      height: .84rem;
-      font-size: .73rem;
-      color: #f7a437;
-      line-height: .84rem;
-    }
-  }
-  .line {
-    height: .1rem;
-    background: rgb(238,237,238);
   }
   .title {
     height: .4rem;
@@ -32,9 +23,20 @@
     line-height: .4rem;
     background: rgb(253,252,253);
     border-bottom: 1px solid rgb(241,241,241);
+    font-size: .15rem;
+
   }
   .wrapper{
-    overflow: hidden;
+    overflow: scroll;
+    position: relative;
+    .empty{
+      width: .8rem;
+      height: auto;
+      position: absolute;
+      left:50%;
+      top:40%;
+      transform: translate(-50%,-50%);
+    }
   }
   .tabs-content {
     padding: 0 .15rem;
@@ -52,15 +54,20 @@
     height: .3rem;
     line-height: .3rem;
     padding-top: .14rem;
+    font-size: .15rem;
+    color: #111;
   }
   .time {
     height: .28rem;
     line-height: .28rem;
+    padding-left: .3rem;
+    background: url("../../images/charm/time.png") no-repeat left center/.13rem .13rem;
+    font-size: .13rem;
+    color: #666;
   }
   .value {
     float: right;
-    width: 1rem;
-    font-size: .4rem;
+    font-size: .3rem;
     line-height: .72rem;
     text-align: right;
     color: #f7a437;
@@ -68,7 +75,7 @@
     span{
       position: absolute;
       top:.2rem;
-      right: .32rem;
+      right: .25rem;
       display: inline-block;
       line-height: .3rem;
       font-size: .3rem;

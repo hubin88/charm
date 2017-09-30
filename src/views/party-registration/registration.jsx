@@ -36,7 +36,7 @@ export default class Registration extends Component {
   }
 
   componentWillMount() {
-    getAjax(`http://${url}/v1/party/field/${this.partyId}`).then((res) => {
+    getAjax(`${url}/v1/party/field/${this.partyId}`).then((res) => {
       if (res.code === 200) {
         const data = res.data || {};
         this.setState({
@@ -214,7 +214,7 @@ export default class Registration extends Component {
         registerNum: this.state.registrationNumber,
         registerUserList: arr,
       };
-      postAjax(`http://${url}/v1/party/register/new`, obj).then((res) => {
+      postAjax(`${url}/v1/party/register/new`, obj).then((res) => {
         if (res.code === 201) {
           const obj = res.data;
           if (this.props.device === "android") {

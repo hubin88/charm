@@ -7,8 +7,8 @@ import { browserHistory } from 'react-router';
 import './show.scss';
 
 export default class Show extends Component {
-  back=()=>{
-    browserHistory.push('/party/charm/activity');
+  back = () => {
+    browserHistory.push('/charm/top');
   };
   render() {
     return (

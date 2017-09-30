@@ -2,6 +2,7 @@
 .show{
   font-size: 0!important;
   position: relative;
+  overflow: scroll;
   img{
     width: 100%;
     height: auto;
@@ -10,9 +11,10 @@
     display: inline-block;
     width: .34rem;
     height: .34rem;
-    position: absolute;
+    position: fixed;
     top: .3rem;
     left: .15rem;
-    background: url("../../images/charm/back.png") no-repeat center/.34rem .34rem;
+    background: url("../../images/charm/back3.png") no-repeat center/.34rem .34rem;
+    z-index: 999;
   }
 }

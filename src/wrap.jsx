@@ -14,11 +14,12 @@ const Wrap = () => (
     <Route path="/" component={App}>
       <Route path="/party/register/partyId/:partyId/userId/:userId" component={Registration} />
       <Route path="/party/register/detail/:registerId" component={RegisterDetails} />
+      <Route path="/party/detail/:partyid" component={PartyDetail} />
       <Route path="/party/detail/:partyid/user/:userid" component={PartyDetail} />
-      <Route path="/party/charm/detail" component={CharmDetail} />
-      <Route path="/party/charm/activity" component={CharmActivity} />
-      <Route path="/party/charm/rule" component={CharmRule} />
-      <Route path="/party/charm/show" component={CharmShow} />
+      <Route path="/charm/detail/:userId" component={CharmDetail} />
+      <Route path="/charm/top" component={CharmActivity} />
+      <Route path="/charm/rule" component={CharmRule} />
+      <Route path="/charm/show" component={CharmShow} />
     </Route>
   </Router>
 );

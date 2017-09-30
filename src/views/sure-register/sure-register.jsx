@@ -9,7 +9,9 @@ import Tips from '../../components/tips'
 
 export default class SureRegister extends Component {
   static contextTypes = {
-    close: PropTypes.func
+    close: PropTypes.func,
+    noRegister: PropTypes.func,
+    callback: PropTypes.func,
   };
 
   constructor(props) {
@@ -17,19 +19,21 @@ export default class SureRegister extends Component {
   }
 
   sure = () => {
-    const suerUrl = `http://${url}/v1/party/register`;
+    const suerUrl = `${url}/v1/party/register`;
     const { params } = this.props;
     POST(suerUrl, {
       partyId: params.partyid,
       registerNum: 1,
       userId: params.userid,
-      versionName:'sring'
+      versionName: 'sring'
     }).then((res) => {
       if (res.code === 200) {
         Tips.show('报名成功');
         this.context.close();
-      }else{
-        Tips.show(res.message)
+        this.props.noRegister();
+        this.props.callback();
+      } else {
+        Tips.show(res.message);
       }
     });
   };

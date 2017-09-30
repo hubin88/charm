@@ -1,18 +1,18 @@
 /**
- * Created by hubin on 2017/8/30.
+ * Created by hubin on 2017/9/14.
  */
 
 import React, { Component, PropTypes } from 'react';
-import './alert.scss';
+import './slide-up.scss';
 import { insertComponent, removeComponentByRef } from '../ultils/helper';
 
-class AlertWrap extends Component {
+class Slide extends Component {
   static propTypes = {
     content: PropTypes.any,
     parentRef: PropTypes.any,
   };
   static childContextTypes = {
-    close:PropTypes.func
+    close: PropTypes.func
   };
 
   componentDidMount() {
@@ -27,11 +27,8 @@ class AlertWrap extends Component {
     } else {
       rect = this.props.parentRef.getBoundingClientRect();
     }
-    const r = this.alert.getBoundingClientRect();
-    const left = rect.left + ((rect.width - r.width) / 2);
-    const top = rect.top + ((rect.height - r.height) / 2);
-    const style = `top: ${top}px; left:${left}px;`;
-    this.alert.setAttribute('style', style);
+    const style = `width: ${rect.width}px;`;
+    this.slide.setAttribute('style', style);
   }
 
   getChildContext = () => {
@@ -40,8 +37,7 @@ class AlertWrap extends Component {
     }
   };
   close = () => {
-    // if (this.props.onDisappear) this.props.onDisappear();
-    removeComponentByRef(this.alert.parentNode);
+    removeComponentByRef(this.slide.parentNode);
   };
 
   render() {
@@ -49,9 +45,10 @@ class AlertWrap extends Component {
       <div>
         <div styleName="alert-mask" onTouchEnd={this.close} />
         <div
+          styleName="slide-up"
           ref={(ref) => {
-            this.alert = ref;
-          }} styleName="alert"
+            this.slide = ref;
+          }}
         >
           {this.props.content}
         </div>
@@ -60,10 +57,10 @@ class AlertWrap extends Component {
   }
 }
 
-export default class Alert extends AlertWrap {
+export default class SlideUp extends Slide {
   static show(param, ref = undefined) {
     if (typeof param === 'object' && param.length !== 0) {
-      insertComponent(<AlertWrap {...param} parentRef={ref} />);
+      insertComponent(<Slide {...param} parentRef={ref} />);
     }
   }
 }
