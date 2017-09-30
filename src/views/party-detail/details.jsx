@@ -246,6 +246,7 @@ export default class Details extends Component {
         this.setState({
           myComment: '',
           isReply: false,
+          commentPlaceholder: '随便说点什么',
         });
         this.getDetails(params.partyid, params.userid);
         this.getJsonComment(params.partyid, params.userid);
