@@ -8,8 +8,9 @@
 }
 
 .ad {
-  position: relative;
-  font-size: 0;
+  //position: relative;
+  //font-size: 0;
+  //height: auto;
   //span {
   //  display: inline-block;
   //  width: .34rem;
@@ -324,7 +325,7 @@
     white-space: nowrap;
     text-overflow: ellipsis;
     padding-top: .05rem;
-    span{
+    span {
       color: #62c0c1;
     }
   }

@@ -58,7 +58,11 @@ export default class Details extends Component {
     const { params } = this.props;
     if (!params.partyid) return;
     if (!params.userid) {
-      params.userid = 1;
+      if (this.props.device === 'Ios') {
+        params.userid = 1;
+      } else {
+        params.userid = this.getUserId();
+      }
     }
     this.getJsonDetails(params.partyid, params.userid);
     this.getJsonRegisterUser(params.partyid);
@@ -139,7 +143,7 @@ export default class Details extends Component {
     if (!this.state.canRegister) return;
     const { data } = this.state;
     const { params } = this.props;
-    if(params.userid === 1) params.userid = this.getUserId();
+    if (params.userid === 1) params.userid = this.getUserId();
     if (data.cost === 3) {
       const obj = {
         partyId: params.partyid,
@@ -219,12 +223,12 @@ export default class Details extends Component {
       return data.userId;
     } else {
       const data = window.jsInterface.getUserInfo();
-      return data.userId;
+      return JSON.parse(data).userId;
     }
   };
   sendComment = () => {
     const { params } = this.props;
-    if(params.userid === 1) params.userid = this.getUserId();
+    if (params.userid === 1) params.userid = this.getUserId();
     const obj = {
       content: this.state.myComment.replace(/</g, '&lt;').replace(/>/, '&gt;'),
       objectId: parseInt(params.partyid),
@@ -257,7 +261,7 @@ export default class Details extends Component {
   };
   deleteSelfComment = (commentId) => {
     const { params } = this.props;
-    if(params.userid === 1) params.userid = this.getUserId();
+    if (params.userid === 1) params.userid = this.getUserId();
     DELETE(`${url}/v1/comment/${commentId}`).then(res => {
       if (res.code === 200) {
         this.getDetails(params.partyid, params.userid);
@@ -267,12 +271,35 @@ export default class Details extends Component {
       }
     });
   };
+  touchStart = (e) => {
+    this.pageY = e.touches[0].pageY;
+    this.movePageY = e.touches[0].pageY;
+  };
+  touchMove = (e) => {
+    this.movePageY = e.touches[0].pageY;
+  };
+  touchEnd = (item) => {
+    if (Math.abs(this.movePageY - this.pageY) > 10) {
+      return false;
+    }
+    this.reply(item);
+  };
   renderCommentList = (item, index) =>
     <li styleName="comment-list" key={index}>
       <div styleName="userImg" onTouchEnd={() => this.goToHeader(item.author.userId)}>
         <img src={item.author.headPic} alt="" />
       </div>
-      <div onTouchEnd={() => this.reply(item)}>
+      <div
+        onTouchStart={(e) => {
+          this.touchStart(e)
+        }}
+        onTouchMove={(e) => {
+          this.touchMove(e)
+        }}
+        onTouchEnd={() => {
+          this.touchEnd(item)
+        }}
+      >
         <div styleName="user">
           <span styleName="user-nick">
             <span>{item.author.name}</span>
@@ -307,11 +334,7 @@ export default class Details extends Component {
     return (
       <div styleName="details" ref={(ref) => { this.details = ref; }}>
         <div styleName="details-content" ref={(ref) => { this.detailsContent = ref; }}>
-          {photo ?
-            <div styleName="ad">
-              <img src={photo[0]} style={{ width: '100%', height: 'auto' }} />
-            </div> : null
-          }
+          {photo ? <img src={photo[0]} style={{ width: '100%', height: 'auto', display: 'block' }} /> : null}
           <div styleName="content">
             <div styleName="title">
               <div styleName="logo" onTouchEnd={() => this.goToHeader(author.userId)}>
